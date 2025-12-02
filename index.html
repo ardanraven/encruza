@@ -43,7 +43,6 @@
                         'float': 'float 6s ease-in-out infinite',
                         'pulse-gold': 'pulse-gold 3s infinite',
                         'fade-in-up': 'fadeInUp 1s ease-out forwards',
-                        'fade-out': 'fadeOut 1s ease-out forwards',
                     },
                     keyframes: {
                         float: {
@@ -57,10 +56,6 @@
                         fadeInUp: {
                             '0%': { opacity: '0', transform: 'translateY(20px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        fadeOut: {
-                            '0%': { opacity: '1', visibility: 'visible' },
-                            '100%': { opacity: '0', visibility: 'hidden' },
                         }
                     }
                 }
@@ -139,61 +134,9 @@
         .nav-link:hover::after {
             width: 100%;
         }
-
-        /* Intro Overlay Styles */
-        #intro-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: #050505;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 1s ease-out, visibility 1s;
-        }
-
-        .video-container {
-            position: relative;
-            width: 80%;
-            max-width: 800px;
-            aspect-ratio: 16 / 9;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 50px rgba(212, 175, 55, 0.1);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
     </style>
 </head>
-<body class="bg-void min-h-screen relative flex flex-col justify-between overflow-hidden" id="main-body">
-
-    <!-- INTRO OVERLAY -->
-    <div id="intro-overlay">
-        <div class="video-container mb-8">
-            <iframe 
-                src="https://player.vimeo.com/video/1142185717?h=6b1162ce84&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479&background=1" 
-                frameborder="0" 
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
-                title="Intro Encruzilhada">
-            </iframe>
-        </div>
-        
-        <button onclick="enterSite()" class="group relative px-10 py-4 bg-transparent border border-gold-500 text-gold-500 font-serif text-xl tracking-[0.2em] overflow-hidden transition-all hover:text-void hover:bg-gold-500">
-            <span class="relative z-10">Entrar na Encruzilhada</span>
-            <div class="absolute inset-0 h-full w-full bg-gold-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-        </button>
-    </div>
+<body class="bg-void min-h-screen relative flex flex-col justify-between">
 
     <!-- Fundo com Ruído e Partículas -->
     <div class="fixed inset-0 bg-subtle-noise z-0 pointer-events-none"></div>
@@ -218,7 +161,7 @@
     <!-- Hero Section -->
     <main class="relative z-10 flex-grow flex flex-col items-center justify-center px-4 py-16 md:py-24 text-center">
         
-        <!-- Animated Key Symbol (Restored but updated) -->
+        <!-- Animated Key Symbol -->
         <div class="mb-8 animate-float text-gold-500 opacity-80">
             <i data-lucide="key" class="w-12 h-12 mx-auto rotate-45"></i>
         </div>
@@ -360,23 +303,6 @@
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
-
-        // Intro Logic
-        function enterSite() {
-            const intro = document.getElementById('intro-overlay');
-            const body = document.getElementById('main-body');
-            
-            intro.style.opacity = '0';
-            intro.style.visibility = 'hidden';
-            
-            // Allow scroll again
-            body.style.overflowY = 'auto';
-            
-            // Optional: Pause video when hidden to save resources (reloads iframe source to stop)
-            setTimeout(() => {
-                intro.style.display = 'none';
-            }, 1000);
-        }
 
         // Simple Particle System for that mystical "embers" effect
         const canvas = document.getElementById('particles');
